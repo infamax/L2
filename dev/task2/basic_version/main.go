@@ -1,22 +1,28 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
-func UnpackString(str string) (string, bool) {
+var (
+	numericStringErr      = errors.New("string contains only numbers")
+	numericFirstSymbolErr = errors.New("string first symbol digit")
+)
+
+func UnpackString(str string) (string, error) {
 	if len(str) == 0 {
-		return "", true
+		return "", nil
 	}
 
 	if str[0] >= '1' && str[0] <= '9' {
-		return "", false
+		return "", numericFirstSymbolErr
 	}
 
 	if isNumericString(str) {
-		return "", false
+		return "", numericStringErr
 	}
 
 	i := 0
@@ -37,7 +43,7 @@ func UnpackString(str string) (string, bool) {
 		}
 		i = j
 	}
-	return res.String(), true
+	return res.String(), nil
 }
 
 func isNumericString(str string) bool {
