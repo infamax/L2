@@ -1,0 +1,9 @@
+{
+  "user_id": 1,
+  "event_id": 1,
+  "title": "not important",
+  "date_created": "2022-07-23",
+  "date_finished": "2022-07-24",
+  "description": "make cleaning",
+  "done": true
+}
