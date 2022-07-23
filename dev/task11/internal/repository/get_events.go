@@ -26,11 +26,8 @@ func (d *postgresDB) GetEvents(ctx context.Context, userID int, date string, day
 
 	for rows.Next() {
 		var event models.Event
-		err := rows.Scan(&event.EventID, &event.Title, &event.DateCreated,
+		_ = rows.Scan(&event.EventID, &event.Title, &event.DateCreated,
 			&event.DateFinished, &event.Description, &event.Done)
-		if err != nil {
-			return nil, err
-		}
 		events = append(events, event)
 	}
 	return events, nil
