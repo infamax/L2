@@ -5,7 +5,7 @@ import (
 	"github.com/infamax/l2/task11/internal/models"
 )
 
-func (d *postgresDB) CreateEvent(ctx context.Context, event *models.Event) error {
+func (d *postgresDB) CreateEvent(ctx context.Context, event *models.Event) (int, error) {
 	const query = `
 		insert into events
 		(user_id, title, date_created, date_finished,
@@ -16,5 +16,5 @@ func (d *postgresDB) CreateEvent(ctx context.Context, event *models.Event) error
 	err := d.pool.QueryRow(ctx, query, event.UserID, event.Title,
 		event.DateCreated, event.DateFinished, event.Description, event.Done).Scan(&event.EventID)
 
-	return err
+	return event.EventID, err
 }
