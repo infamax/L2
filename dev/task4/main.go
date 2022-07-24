@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sort"
+	"strings"
 )
 
 func GroupAnagrams(words []string) map[string][]string {
@@ -24,7 +25,7 @@ func GroupAnagrams(words []string) map[string][]string {
 func makeSliceBytes(words []string) [][]rune {
 	res := make([][]rune, len(words), len(words))
 	for i := 0; i < len(words); i++ {
-		res[i] = []rune(words[i])
+		res[i] = []rune(strings.ToLower(words[i]))
 	}
 	return res
 }
@@ -44,7 +45,9 @@ func getListAnagrams(words [][]rune) [][]string {
 
 	res := make([][]string, 0, len(mapAnagrams))
 	for _, val := range mapAnagrams {
-		res = append(res, val)
+		if len(val) > 1 {
+			res = append(res, val)
+		}
 	}
 
 	for _, val := range res {

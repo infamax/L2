@@ -32,6 +32,24 @@ func TestGroupAnagrams(t *testing.T) {
 			inputData:   []string{"пятак"},
 			expectedRes: map[string][]string{},
 		},
+		{
+			name: "different registers case",
+			inputData: []string{"пятак", "пяТка", "тяпКа",
+				"листок", "слиток", "сТОлик"},
+			expectedRes: map[string][]string{
+				"листок": {"слиток", "столик"},
+				"пятак":  {"пятка", "тяпка"},
+			},
+		},
+		{
+			name: "one elem slice and more than one elem slice case",
+			inputData: []string{
+				"листок", "пятак", "слиток", "столик",
+			},
+			expectedRes: map[string][]string{
+				"листок": {"слиток", "столик"},
+			},
+		},
 	}
 
 	for _, tt := range tests {
