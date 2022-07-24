@@ -7,7 +7,9 @@ import (
 
 func (d *postgresDB) GetEvents(ctx context.Context, userID int, date string, days int) ([]models.Event, error) {
 	const query = `
-		select event_id, title, date_created, date_finished,
+		select event_id, title, 
+		to_char(date_created, 'YYYY-MM-DD HH:MI:SS'), 
+		to_char(date_finished, 'YYYY-MM-DD HH:MI:SS'),
 		description, done
 		from events
 		where user_id = $1 and
