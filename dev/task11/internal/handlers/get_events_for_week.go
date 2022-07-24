@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -35,6 +36,11 @@ func (h *Handler) GetEventsForWeek(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	writeJsonResponseEvent(w, http.StatusOK, events)
+	resEvent := ResultEvent{
+		Result: fmt.Sprintf("Found %d events for user %d", len(events), userID),
+		Events: events,
+	}
+
+	writeJsonResponseEvent(w, http.StatusOK, &resEvent)
 
 }

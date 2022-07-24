@@ -29,11 +29,16 @@ func writeJsonResponseString(hasError bool, w http.ResponseWriter, code int, msg
 	}
 }
 
-func writeJsonResponseEvent(w http.ResponseWriter, code int, event []models.Event) {
+type ResultEvent struct {
+	Result string         `json:"result"`
+	Events []models.Event `json:"events"`
+}
+
+func writeJsonResponseEvent(w http.ResponseWriter, code int, resEvent *ResultEvent) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 
-	if err := json.NewEncoder(w).Encode(event); err != nil {
+	if err := json.NewEncoder(w).Encode(resEvent); err != nil {
 		http.Error(w, "server error", http.StatusInternalServerError)
 	}
 }
