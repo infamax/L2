@@ -5,6 +5,9 @@ const (
 	NumFlag
 	UniqFlag
 	CheckSortedFlag
+	MonthSortFlag
+	HumanSortFlag
+	IgnoreFlag
 )
 
 const (
@@ -12,7 +15,7 @@ const (
 )
 
 var (
-	BoolFlags [4]bool
+	BoolFlags [7]bool
 	NumFlags  = [1]int{0}
 )
 
@@ -41,5 +44,20 @@ var (
 		Name:         "c",
 		DefaultValue: false,
 		Description:  "check for sorted input; do not sort",
+	}
+	MonthFlag = Flag{
+		Name:         "M",
+		DefaultValue: false,
+		Description:  " compare (unknown) < 'JAN' < ... < 'DEC'",
+	}
+	HumanReadableFlag = Flag{
+		Name:         "h",
+		DefaultValue: false,
+		Description:  " compare human readable numbers (e.g., 2K 1G)",
+	}
+	IgnoreLeadingBlanksFlag = Flag{
+		Name:         "b",
+		DefaultValue: false,
+		Description:  "ignore leading blanks",
 	}
 )

@@ -1,6 +1,5 @@
-f
-e
-d
-c
-b
+    b
+  c
+       e
+    d
 a

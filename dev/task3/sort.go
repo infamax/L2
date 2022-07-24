@@ -1,11 +1,11 @@
 package main
 
 import (
-	"L2/dev/task3/internal/flags"
-	"L2/dev/task3/internal/sorts"
 	"bufio"
 	"flag"
 	"fmt"
+	"github.com/infamax/l2/dev/task3/internal/flags"
+	"github.com/infamax/l2/dev/task3/internal/sorts"
 	"os"
 )
 
@@ -18,6 +18,12 @@ func main() {
 		flags.UniqueFlag.Description)
 	flag.BoolVar(&flags.BoolFlags[flags.CheckSortedFlag], flags.CheckedSortedFlag.Name,
 		flags.CheckedSortedFlag.DefaultValue.(bool), flags.CheckedSortedFlag.Description)
+	flag.BoolVar(&flags.BoolFlags[flags.MonthSortFlag], flags.MonthFlag.Name,
+		flags.MonthFlag.DefaultValue.(bool), flags.MonthFlag.Description)
+	flag.BoolVar(&flags.BoolFlags[flags.HumanSortFlag], flags.HumanReadableFlag.Name,
+		flags.HumanReadableFlag.DefaultValue.(bool), flags.HumanReadableFlag.Description)
+	flag.BoolVar(&flags.BoolFlags[flags.IgnoreFlag], flags.IgnoreLeadingBlanksFlag.Name,
+		flags.IgnoreLeadingBlanksFlag.DefaultValue.(bool), flags.IgnoreLeadingBlanksFlag.Description)
 	flag.IntVar(&flags.NumFlags[flags.ColFlag], flags.ColumnFlag.Name, flags.ColumnFlag.DefaultValue.(int),
 		flags.ColumnFlag.Description)
 	flag.Parse()
@@ -74,6 +80,15 @@ func main() {
 			case flags.CheckSortedFlag:
 				fmt.Println("CheckFlag!")
 				fl = sorts.CheckSortedSlice(res)
+			case flags.MonthSortFlag:
+				fmt.Println("MonthFlag!")
+				res = sorts.SortMonth(res)
+			case flags.HumanSortFlag:
+				fmt.Println("HumanReadableFlag")
+				res = sorts.SortHumanReadable(res)
+			case flags.IgnoreFlag:
+				fmt.Println("IgnoreLeadingBlanksFlag")
+				res = sorts.SortIgnoreLeadingBlanks(res)
 			}
 		}
 	}
