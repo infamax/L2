@@ -1,0 +1,1 @@
+mockgen -source=internal/repository/repo.go -destination=internal/service/mock/mock_repository.go
